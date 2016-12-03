@@ -33,5 +33,29 @@ public class FakerTest {
 		instance.setFoo("value");
 		assertEquals("value", instance.getFoo());
 	}
+	
+	@Test
+	public void testNoGetter1() {
+		Dummy instance = Faker.fake(Dummy.class);
+		assertNull("No attribute values given", instance.getFoo());
+		instance.setFoo("value");
+		assertNull(instance.getSum(null, null));
+	}
+	
+	@Test
+	public void testNoGetter2() {
+		Dummy instance = Faker.fake(Dummy.class);
+		assertNull("No attribute values given", instance.getFoo());
+		instance.setFoo("value");
+		assertNull(instance.calculateBar());
+	}
+	
+	@Test
+	public void testNoSetter() {
+		Dummy instance = Faker.fake(Dummy.class);
+		assertNull("No attribute values given", instance.getFoo());
+		instance.setFoo("value");
+		instance.setUp();
+	}
 
 }
