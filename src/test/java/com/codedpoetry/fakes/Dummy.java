@@ -11,4 +11,6 @@ public interface Dummy {
 	public Object getSum(Object arg1, Object arg2);
 	
 	public void setUp();
+	
+	public Object get();
 }
