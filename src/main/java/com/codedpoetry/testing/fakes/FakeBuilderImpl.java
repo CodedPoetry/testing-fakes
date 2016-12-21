@@ -1,5 +1,6 @@
 package com.codedpoetry.testing.fakes;
 
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +35,9 @@ public class FakeBuilderImpl<T> implements FakeBuilder<T>{
 
 	@Override
 	public T build() {
-		return (T) java.lang.reflect.Proxy.newProxyInstance(
+		return (T) Proxy.newProxyInstance(
                 clazz.getClassLoader(),
-                new java.lang.Class[] { clazz },
+                new Class[] { clazz },
                 new GetterSetterInvocationHandler(attributes));
 	}
 

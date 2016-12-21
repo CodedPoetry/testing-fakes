@@ -57,5 +57,21 @@ public class FakerTest {
 		instance.setFoo("value");
 		instance.setUp();
 	}
+	
+	@Test
+	public void testGetMethod() {
+		Dummy instance = Faker.newBuilder(Dummy.class)
+				.with("get", "VALUE")
+				.build();
+		assertEquals("VALUE", instance.get());
+	}
+	
+	@Test
+	public void testStubbedMethod() {
+		Dummy instance = Faker.newBuilder(Dummy.class)
+				.with("getFoo", "VALUE")
+				.build();
+		assertEquals("VALUE", instance.getFoo());
+	}
 
 }

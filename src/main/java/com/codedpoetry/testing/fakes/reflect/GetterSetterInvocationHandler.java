@@ -7,30 +7,27 @@ import java.util.Map;
 
 public class GetterSetterInvocationHandler implements InvocationHandler{
 
-	private Map<String, Object> attributes = new HashMap<>();
+	private Map<String, Object> attributes;
 	
 	public GetterSetterInvocationHandler(Map<String, Object> attributes) {
 		super();
 		this.attributes = attributes;
 	}
 
-	public GetterSetterInvocationHandler() {
-		super();
-	}
-
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		
-		if (isGetter(method)) {
+		Object result = attributes.get(method.getName());
+
+		if (result != null){
+			return result;
+		} else if (isGetter(method)) {
 			String attribute = parseGetterSetterAtributte(method);
-			return attributes.get(attribute);
-		}
-		if (isSetter(method)){
+			result = attributes.get(attribute);
+		} else if (isSetter(method)){
 			String attribute = parseGetterSetterAtributte(method);
 			attributes.put(attribute, args[0]);
-			return null;
 		}
 		
-		return null;
+		return result;
 	}
 
 	private String parseGetterSetterAtributte(Method method) {
